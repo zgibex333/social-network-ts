@@ -1,0 +1,12 @@
+.header {
+    grid-area: header;
+    background: pink;
+
+}
+
+.header img {
+    object-fit: contain;
+    object-position: left;
+    width: 100%;
+    height: 100%;
+}
