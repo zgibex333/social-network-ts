@@ -1,3 +1,15 @@
+export type StoreType = {
+    _state: stateType
+    _callSubscriber: Function & {}
+    subscribe: (arg: Function) => void
+    getState: () => stateType
+    dispatch: (action: any) => void
+}
+
+export interface ActionType {
+    [key: string]: any
+}
+
 export type dialoguesItem = {
     name: string
     id: number
@@ -17,6 +29,7 @@ export type postItem = {
 export type messagesPageType = {
     dialoguesData: Array<dialoguesItem>
     dialoguesContents: Array<dialoguesMessage>
+    dialoguesMessage: string
 }
 
 export type profilePageType = {
@@ -28,4 +41,3 @@ export type stateType = {
     messagesPage: messagesPageType
     profilePage: profilePageType
 }
-

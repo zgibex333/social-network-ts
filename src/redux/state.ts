@@ -1,15 +1,6 @@
-import { postItem, stateType } from '../types/types'
-
-// let rerenderTree:Function
-
-type StoreType = {
-    _state: stateType
-    _callSubscriber: Function & {}
-    addPost: (message: string) => void
-    changeNewPostText: (newText: string) => void
-    subscribe: (arg: Function) => void
-    getState: () => stateType
-}
+import { postItem, stateType, StoreType } from '../types/types'
+import profileReducer from './reducers/profile-reducer'
+import dialogsReducer from './reducers/dialogs-reducer'
 
 export const store: StoreType = {
     _state: {
@@ -28,6 +19,7 @@ export const store: StoreType = {
                 { name: 'Ho', id: 2 },
                 { name: 'Foy', id: 3 },
             ],
+            dialoguesMessage: '',
         },
         profilePage: {
             postsData: [
@@ -43,22 +35,13 @@ export const store: StoreType = {
     getState() {
         return this._state
     },
-    addPost(message: string): void {
-        const newPost: postItem = {
-            id: 11,
-            likesCount: 10,
-            message: this._state.profilePage.newPostText,
-        }
-        this._state.profilePage.postsData.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    changeNewPostText(newText: string): void {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
     subscribe(observer: Function) {
         this._callSubscriber = observer
         observer()
+    },
+    dispatch(action) {
+        dialogsReducer(this._state.messagesPage, action)
+        profileReducer(this._state.profilePage, action)
+        this._callSubscriber(this._state)
     },
 }

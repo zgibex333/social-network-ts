@@ -1,40 +1,34 @@
 import React, { ElementType } from 'react'
 import { Post } from './Post'
-import { ProfileInfo } from '../ProfileInfo'
 import s from '../css-modules/Posts.module.css'
 import { profilePageType } from '../../types/types'
+import {
+    addPostActionCreator,
+    updateNewPostTextActionCreator,
+} from '../../redux/reducers/profile-reducer'
 
 type propsPostsType = {
     profilePage: profilePageType
-    addPost: (item: string) => void
-    changeNewPostText: (item: string) => void
+    dispatch: (action: any) => void
 }
 
-export const Posts = ({
-    profilePage,
-    addPost,
-    changeNewPostText,
-}: propsPostsType) => {
-    let newPostEl = React.useRef<HTMLTextAreaElement>(null)
-    const clickPostHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-        if (newPostEl.current) {
-            addPost(newPostEl.current.value)
-        }
+export const Posts = ({ profilePage, dispatch }: propsPostsType) => {
+    const clickPostHandler = () => {
+        dispatch(addPostActionCreator())
     }
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        changeNewPostText(e.target.value)
+        dispatch(updateNewPostTextActionCreator(e.target.value))
     }
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
-            <div className="">
+            <div>
                 <textarea
-                    ref={newPostEl}
                     value={profilePage.newPostText}
                     onChange={onChangeHandler}
-                ></textarea>
+                />
                 <button onClick={clickPostHandler}>Add</button>
             </div>
             <ul className={s.posts}>

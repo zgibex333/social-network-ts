@@ -9,11 +9,10 @@ import { stateType } from './types/types'
 
 type appPropsType = {
     state: stateType
-    addPost: (item: string) => void
-    changeNewPostText: (item: string) => void
+    dispatch: (action: any) => void
 }
 
-function App({ state, addPost, changeNewPostText }: appPropsType) {
+function App({ state, dispatch }: appPropsType) {
     return (
         <div className="app-wrapper">
             <Header />
@@ -29,6 +28,10 @@ function App({ state, addPost, changeNewPostText }: appPropsType) {
                                 dialoguesContents={
                                     state.messagesPage.dialoguesContents
                                 }
+                                dialoguesMessage={
+                                    state.messagesPage.dialoguesMessage
+                                }
+                                dispatch={dispatch}
                             />
                         }
                     />
@@ -36,8 +39,7 @@ function App({ state, addPost, changeNewPostText }: appPropsType) {
                         path="/profile"
                         element={
                             <Profile
-                                addPost={addPost}
-                                changeNewPostText={changeNewPostText}
+                                dispatch={dispatch}
                                 profilePage={state.profilePage}
                             />
                         }
