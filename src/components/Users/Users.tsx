@@ -5,7 +5,7 @@ type UsersPropsType = {
     users: Array<userType>
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUsers: (userId: Array<userType>) => void
+    setUsers: (users: Array<userType>) => void
 }
 
 export const Users = ({
@@ -51,7 +51,6 @@ export const Users = ({
             },
         ])
     }
-
     return (
         <div>
             {users.map((user) => (
