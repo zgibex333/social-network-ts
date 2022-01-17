@@ -3,17 +3,14 @@ import s from './css-modules/Profile.module.css'
 import { Posts } from './Posts/Posts'
 import { ProfileInfo } from './ProfileInfo'
 import { profilePageType } from '../types/types'
+import { PostsContainer } from './Posts/PostsContainer'
+import { StoreType } from '../redux/redux-store'
 
-type profilePropsType = {
-    profilePage: profilePageType
-    dispatch: (action: any) => void
-}
-
-export const Profile = ({ profilePage, dispatch }: profilePropsType) => {
+export const Profile = () => {
     return (
         <div>
             <ProfileInfo />
-            <Posts dispatch={dispatch} profilePage={profilePage} />
+            <PostsContainer />
         </div>
     )
 }

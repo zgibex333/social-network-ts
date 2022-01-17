@@ -1,10 +1,30 @@
 import { ActionType, messagesPageType } from '../../types/types'
-import profileReducer from './profile-reducer'
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
-const dialogsReducer = (state: messagesPageType, action: ActionType) => {
+let initialState = {
+    dialoguesData: [
+        { name: 'Ivan', id: 1 },
+        { name: 'Katy', id: 2 },
+        { name: 'Hannah', id: 3 },
+        { name: 'Osvald', id: 4 },
+        { name: 'Kristin', id: 5 },
+        { name: 'Michael', id: 6 },
+        { name: 'Steve', id: 7 },
+    ],
+    dialoguesContents: [
+        { name: 'Hi', id: 1 },
+        { name: 'Ho', id: 2 },
+        { name: 'Foy', id: 3 },
+    ],
+    dialoguesMessage: '',
+}
+
+const dialogsReducer = (
+    state: messagesPageType = initialState,
+    action: ActionType
+): messagesPageType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
             state.dialoguesMessage = action.newText
@@ -22,7 +42,6 @@ const dialogsReducer = (state: messagesPageType, action: ActionType) => {
     }
 }
 
-export default dialogsReducer
 export const addMessageActionCreator = () => ({
     type: ADD_MESSAGE,
 })
@@ -30,3 +49,5 @@ export const updateNewMessageTextActionCreator = (text: string) => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
     newText: text,
 })
+
+export default dialogsReducer

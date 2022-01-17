@@ -12,25 +12,17 @@ type dialoguesPropsType = {
     dialoguesData: Array<dialoguesItem>
     dialoguesContents: Array<dialoguesMessage>
     dialoguesMessage: string
-    dispatch: (action: object) => void
+    updateMessage: (text: string) => void
+    addMessage: () => void
 }
 
 export const Dialogues = ({
     dialoguesData,
     dialoguesContents,
     dialoguesMessage,
-    dispatch,
+    updateMessage,
+    addMessage,
 }: dialoguesPropsType) => {
-    const updateMessageHandler = (
-        e: React.ChangeEvent<HTMLTextAreaElement>
-    ) => {
-        dispatch(updateNewMessageTextActionCreator(e.target.value))
-    }
-
-    const addMessageHandler = () => {
-        dispatch(addMessageActionCreator())
-    }
-
     return (
         <div className={s.dialogues}>
             <ul className={s.dialoguesItems}>
@@ -51,12 +43,12 @@ export const Dialogues = ({
                 <div>
                     <textarea
                         value={dialoguesMessage}
-                        onChange={updateMessageHandler}
+                        onChange={(e) => updateMessage(e.target.value)}
                         placeholder="enter message..."
                     />
                 </div>
                 <div>
-                    <button onClick={addMessageHandler}>Send</button>
+                    <button onClick={addMessage}>Send</button>
                 </div>
             </div>
         </div>

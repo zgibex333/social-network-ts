@@ -6,13 +6,16 @@ import { Profile } from './components/Profile'
 import { Dialogues } from './components/Dialogues/Dialogues'
 import { Route, Routes } from 'react-router-dom'
 import { stateType } from './types/types'
+import { StateType, StoreType } from './redux/redux-store'
+import { DialoguesContainer } from './components/Dialogues/DialoguesContainer'
 
-type appPropsType = {
-    state: stateType
-    dispatch: (action: any) => void
-}
+// type appPropsType = {
+//     state: StateType
+//     dispatch: (action: any) => void
+//     store: StoreType
+// }
 
-function App({ state, dispatch }: appPropsType) {
+function App() {
     return (
         <div className="app-wrapper">
             <Header />
@@ -22,28 +25,9 @@ function App({ state, dispatch }: appPropsType) {
                 <Routes>
                     <Route
                         path="/dialogues/*"
-                        element={
-                            <Dialogues
-                                dialoguesData={state.messagesPage.dialoguesData}
-                                dialoguesContents={
-                                    state.messagesPage.dialoguesContents
-                                }
-                                dialoguesMessage={
-                                    state.messagesPage.dialoguesMessage
-                                }
-                                dispatch={dispatch}
-                            />
-                        }
+                        element={<DialoguesContainer />}
                     />
-                    <Route
-                        path="/profile"
-                        element={
-                            <Profile
-                                dispatch={dispatch}
-                                profilePage={state.profilePage}
-                            />
-                        }
-                    />
+                    <Route path="/profile" element={<Profile />} />
                 </Routes>
             </div>
         </div>

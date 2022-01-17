@@ -6,7 +6,7 @@ export type StoreType = {
     dispatch: (action: any) => void
 }
 
-export interface ActionType {
+export type ActionType = {
     [key: string]: any
 }
 
