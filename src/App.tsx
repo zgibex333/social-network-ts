@@ -8,6 +8,8 @@ import { Route, Routes } from 'react-router-dom'
 import { stateType } from './types/types'
 import { StateType, StoreType } from './redux/redux-store'
 import { DialoguesContainer } from './components/Dialogues/DialoguesContainer'
+import { Users } from './components/Users/Users'
+import UsersContainer from './components/Users/UsersContainer'
 
 // type appPropsType = {
 //     state: StateType
@@ -28,6 +30,7 @@ function App() {
                         element={<DialoguesContainer />}
                     />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/users" element={<UsersContainer />} />
                 </Routes>
             </div>
         </div>

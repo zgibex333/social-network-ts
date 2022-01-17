@@ -27,16 +27,17 @@ const dialogsReducer = (
 ): messagesPageType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.dialoguesMessage = action.newText
-            return state
+            return { ...state, dialoguesMessage: action.newText }
         case ADD_MESSAGE:
             const newMessage = {
                 name: state.dialoguesMessage,
                 id: 4,
             }
-            state.dialoguesContents.push(newMessage)
-            state.dialoguesMessage = ''
-            return state
+            return {
+                ...state,
+                dialoguesContents: [...state.dialoguesContents, newMessage],
+                dialoguesMessage: '',
+            }
         default:
             return state
     }

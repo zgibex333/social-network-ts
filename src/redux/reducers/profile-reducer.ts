@@ -1,4 +1,5 @@
 import { ActionType, postItem, profilePageType } from '../../types/types'
+import { stat } from 'fs'
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -22,12 +23,13 @@ const profileReducer = (
                 likesCount: 10,
                 message: state.newPostText,
             }
-            state.postsData.push(newPost)
-            state.newPostText = ''
-            return state
+            return {
+                ...state,
+                postsData: [...state.postsData, newPost],
+                newPostText: '',
+            }
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText
-            return state
+            return { ...state, newPostText: action.newText }
         default:
             return state
     }
