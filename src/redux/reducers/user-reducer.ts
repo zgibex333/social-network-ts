@@ -6,13 +6,13 @@ const SET_USERS = 'SET_USERS'
 
 export type userType = {
     id: number
-    status: string
-    fullName: string
-    avatar: string
-    following: boolean
-    location: {
-        city: string
-        country: string
+    status: string | undefined
+    name: string
+    uniqueUrlName: string | undefined
+    followed: boolean
+    photos: {
+        small: string | undefined
+        large: string | undefined
     }
 }
 
@@ -34,7 +34,7 @@ export const usersReducer = (
                 ...state,
                 users: state.users.map((user) => {
                     if (user.id === action.userId) {
-                        return { ...user, following: true }
+                        return { ...user, followed: true }
                     }
                     return user
                 }),
@@ -44,7 +44,7 @@ export const usersReducer = (
                 ...state,
                 users: state.users.map((user) => {
                     if (user.id === action.userId) {
-                        return { ...user, following: false }
+                        return { ...user, followed: false }
                     }
                     return user
                 }),
@@ -67,4 +67,4 @@ export const unfollowActionCreater = (userId: number) => ({
     type: UNFOLLOW,
     userId,
 })
-export const setUsers = (users: Array<userType>) => ({ type: SET_USERS, users })
+export const setUsers = (users: any) => ({ type: SET_USERS, users })

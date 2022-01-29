@@ -1,5 +1,6 @@
 import { userType } from '../../redux/reducers/user-reducer'
 import s from './users.module.css'
+import axios from 'axios'
 
 type UsersPropsType = {
     users: Array<userType>
@@ -15,41 +16,12 @@ export const Users = ({
     setUsers,
 }: UsersPropsType) => {
     if (users.length === 0) {
-        setUsers([
-            {
-                id: 1,
-                fullName: 'Dmitry',
-                avatar: 'https://bit.ly/3Aa1lew',
-                status: 'in love',
-                following: false,
-                location: {
-                    city: 'Minsk',
-                    country: 'Belarus',
-                },
-            },
-            {
-                id: 2,
-                fullName: 'Dmitry',
-                avatar: 'https://bit.ly/3Aa1lew',
-                status: 'in love',
-                following: true,
-                location: {
-                    city: 'Moscow',
-                    country: 'Russia',
-                },
-            },
-            {
-                id: 3,
-                fullName: 'Dmitry',
-                avatar: 'https://bit.ly/3Aa1lew',
-                status: 'in love',
-                following: false,
-                location: {
-                    city: 'Warszawa',
-                    country: 'Poland',
-                },
-            },
-        ])
+        axios
+            .get('https://social-network.samuraijs.com/api/1.0/users')
+            .then((response: any) => {
+                console.log(response)
+                setUsers(response.data.items)
+            })
     }
     return (
         <div>
@@ -58,10 +30,14 @@ export const Users = ({
                     <div>
                         <img
                             className={s.avatar}
-                            src={user.avatar}
+                            src={
+                                user.photos.small
+                                    ? user.photos.small
+                                    : 'https://bit.ly/3nx6uIs'
+                            }
                             alt="user-avatar"
                         />
-                        {user.following ? (
+                        {user.followed ? (
                             <button onClick={() => unfollow(user.id)}>
                                 Unfollow
                             </button>
@@ -72,10 +48,8 @@ export const Users = ({
                         )}
                     </div>
                     <div>
-                        <div>{user.fullName}</div>
+                        <div>{user.name}</div>
                         <div>{user.status}</div>
-                        <div>{user.location.city}</div>
-                        <div>{user.location.country}</div>
                     </div>
                 </div>
             ))}
