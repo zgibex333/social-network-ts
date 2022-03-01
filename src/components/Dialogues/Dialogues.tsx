@@ -7,14 +7,7 @@ import {
     addMessageActionCreator,
     updateNewMessageTextActionCreator,
 } from '../../redux/reducers/dialogs-reducer'
-
-type dialoguesPropsType = {
-    dialoguesData: Array<dialoguesItem>
-    dialoguesContents: Array<dialoguesMessage>
-    dialoguesMessage: string
-    updateMessage: (text: string) => void
-    addMessage: () => void
-}
+import { DialoguesPropsType } from './DialoguesContainer'
 
 export const Dialogues = ({
     dialoguesData,
@@ -22,7 +15,7 @@ export const Dialogues = ({
     dialoguesMessage,
     updateMessage,
     addMessage,
-}: dialoguesPropsType) => {
+}: DialoguesPropsType) => {
     return (
         <div className={s.dialogues}>
             <ul className={s.dialoguesItems}>

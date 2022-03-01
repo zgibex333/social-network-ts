@@ -4,7 +4,7 @@ const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 
-export type userType = {
+export type UserType = {
     id: number
     status: string | undefined
     name: string
@@ -17,7 +17,7 @@ export type userType = {
 }
 
 export type UsersType = {
-    users: Array<userType> | []
+    users: Array<UserType> | []
 }
 
 let initialState: UsersType = {
@@ -27,7 +27,7 @@ let initialState: UsersType = {
 export const usersReducer = (
     state: UsersType = initialState,
     action: ActionType
-) => {
+): UsersType => {
     switch (action.type) {
         case FOLLOW:
             return {

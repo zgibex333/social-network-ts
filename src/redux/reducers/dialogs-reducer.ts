@@ -1,4 +1,4 @@
-import { ActionType, messagesPageType } from '../../types/types'
+import { ActionType, dialoguesItem, dialoguesMessage } from '../../types/types'
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 const ADD_MESSAGE = 'ADD-MESSAGE'
@@ -12,19 +12,21 @@ let initialState = {
         { name: 'Kristin', id: 5 },
         { name: 'Michael', id: 6 },
         { name: 'Steve', id: 7 },
-    ],
+    ] as Array<dialoguesItem>,
     dialoguesContents: [
         { name: 'Hi', id: 1 },
         { name: 'Ho', id: 2 },
         { name: 'Foy', id: 3 },
-    ],
+    ] as Array<dialoguesMessage>,
     dialoguesMessage: '',
 }
 
+export type InitialStateType = typeof initialState
+
 const dialogsReducer = (
-    state: messagesPageType = initialState,
+    state: InitialStateType = initialState,
     action: ActionType
-): messagesPageType => {
+): InitialStateType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
             return { ...state, dialoguesMessage: action.newText }

@@ -3,15 +3,15 @@ import profileReducer from './reducers/profile-reducer'
 import dialogsReducer from './reducers/dialogs-reducer'
 import { usersReducer } from './reducers/user-reducer'
 
-let reducers = combineReducers({
+const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
     usersPage: usersReducer,
 })
 
-export type StateType = ReturnType<typeof reducers>
+export type StateType = ReturnType<typeof rootReducer>
 
-let store = createStore(reducers)
+let store = createStore(rootReducer)
 
 export type StoreType = typeof store
 
